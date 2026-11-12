@@ -1,0 +1,37 @@
+{
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "overflow": false
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "overflow": false
+    }
+  ],
+  "checks": [
+    "All homepage images loaded; no overflow at 360, 390, 768, 1440px",
+    "Mobile menu, Escape/focus restoration, FAQ",
+    "Server filters, project details, lightbox and Escape",
+    "Internal links, page headings and mobile layout on all principal pages",
+    "Unconfigured SMTP returns 503, honest error, entered content retained"
+  ],
+  "errors": [],
+  "local_lab_metrics": {
+    "lcp": 56,
+    "cls": 0,
+    "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured."
+  }
+}

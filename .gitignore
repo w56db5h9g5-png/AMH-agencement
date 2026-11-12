@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+instance/
+.env
+.pytest_cache/
+static/images/upload_*

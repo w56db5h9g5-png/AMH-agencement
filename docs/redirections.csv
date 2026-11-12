@@ -1,0 +1,16 @@
+ancienne_url,nouvelle_url,statut,commentaire
+/?page_id=24,/contact/,301,Ancien lien de contact WordPress
+/atelier/,/la-societe/,301,Alias lisible de la page atelier
+/sitemap_index.xml,/sitemap.xml,301,Ancien sitemap annoncé dans robots.txt
+/wp-sitemap.xml,/sitemap.xml,301,Alias sitemap WordPress
+/amenagement-securite-bebe-rambarde-meuble-sur-mesure/,/blog/amenagement-securite-bebe-rambarde-meuble-sur-mesure/,301,Article existant adapté et conservé
+/,/,200,URL conservée
+/realisations/,/realisations/,200,URL conservée
+/la-societe/,/la-societe/,200,URL conservée
+/menuiserie-sur-mesure-paris/,/menuiserie-sur-mesure-paris/,200,URL conservée
+/renovation-appartement-paris/,/renovation-appartement-paris/,200,URL conservée
+/renovation-bureaux-commerces-paris/,/renovation-bureaux-commerces-paris/,200,URL conservée
+/syndic-et-copropriete/,/syndic-et-copropriete/,200,URL conservée
+/deroulement-projet/,/deroulement-projet/,200,URL conservée
+/blog/,/blog/,200,URL conservée
+/contact/,/contact/,200,URL conservée

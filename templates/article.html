@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% from 'macros.html' import page_heading, photo, cta with context %}
+{% block content %}<div class="shell breadcrumb"><a href="/blog/">‹ Le carnet de l’atelier</a></div>{{ page_heading('Conseils pratiques',article.title,article.intro) }}<div class="shell wide-image">{{ photo(article.image,article.title,'',true) }}</div><article class="reading-column section">{% for title,text in article.sections %}<h2>{{ title }}</h2><p>{{ text }}</p>{% endfor %}</article>{{ cta() }}{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ meta_title }}</title><meta name="description" content="{{ meta_description }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:locale" content="fr_FR"><meta property="og:type" content="website"><meta property="og:site_name" content="AMH Agencement">
+<meta property="og:title" content="{{ meta_title }}"><meta property="og:description" content="{{ meta_description }}"><meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ site_origin }}{{ image_url(site.hero_image,1600) }}"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#102d35">
+<link rel="icon" href="{{ url_for('static',filename='images/favicon.svg') }}" type="image/svg+xml">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/site.css') }}">
+<script src="{{ url_for('static',filename='js/site.js') }}" defer></script>
+<script type="application/ld+json">{{ {'@context':'https://schema.org','@type':'Organization','name':site.name,'url':site_origin,'logo':site_origin+url_for('static',filename='images/logo.png')}|tojson }}</script>
+{% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="topline"><div class="shell"><span>Agencement · Menuiserie · Intérieurs</span><span>Paris & atelier à Bagnolet <span class="top-dot">—</span> <a href="tel:{{ site.phone_link }}">{{ site.phone }}</a></span></div></div>
+<header class="header"><div class="shell header-inner">
+<a class="brand" href="/" aria-label="AMH Agencement — Accueil"><img src="{{ url_for('static',filename='images/logo.png') }}" width="978" height="418" alt="AMH"><span>AGENCEMENT</span></a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><span class="menu-lines" aria-hidden="true">☰</span> Menu</button>
+<nav id="navigation" class="navigation" aria-label="Navigation principale">
+<a href="/realisations/" {% if request.path.startswith('/realisations/') %}aria-current="page"{% endif %}>Réalisations</a>
+<a href="/la-societe/" {% if request.path=='/la-societe/' %}aria-current="page"{% endif %}>L’Atelier</a>
+<details class="nav-expertises"><summary>Savoir-faire <span aria-hidden="true">⌄</span></summary><div class="nav-dropdown">{% for s in services %}<a href="/{{ s.slug }}/">{{ s.short }}</a>{% endfor %}</div></details>
+<a href="/blog/" {% if request.path.startswith('/blog/') %}aria-current="page"{% endif %}>Conseils</a>
+<a class="button button-small" href="/contact/">Parler de mon projet <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+</nav></div></header>
+<main id="main">{% block content %}{% endblock %}</main>
+{% block before_footer %}{% endblock %}
+<footer class="footer"><div class="shell"><div class="footer-top"><a class="brand brand-footer" href="/"><img src="{{ url_for('static',filename='images/logo.png') }}" width="978" height="418" alt="AMH Agencement"><span>AGENCEMENT</span></a><p>De la matière à l’espace.<br>Un projet à votre mesure.</p><a class="text-link" href="/contact/">Construisons la suite <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a></div>
+<div class="footer-grid"><div><h2>Atelier & matériauthèque</h2><p>{{ site.workshop }}</p><p class="muted">Contactez-nous avant votre visite.</p></div><div><h2>Bureau parisien</h2><p>{{ site.office }}</p></div><div><h2>Rencontrons-nous</h2><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a><a href="mailto:{{ site.email }}">{{ site.email }}</a></div><div><h2>À découvrir</h2><a href="/deroulement-projet/">Les étapes de votre projet</a>{% if site.social_instagram %}<a href="{{ site.social_instagram }}" target="_blank" rel="noopener noreferrer">Instagram <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>{% endif %}{% if site.social_linkedin %}<a href="{{ site.social_linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>{% endif %}</div></div>
+<div class="footer-bottom"><span>© {{ current_year }} AMH Agencement</span><div><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a></div><span>Conçu pour durer.</span></div></div></footer>
+<div class="mobile-contact"><a href="/contact/">Parler de mon projet <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a><a href="tel:{{ site.phone_link }}" aria-label="Appeler AMH au {{ site.phone }}">Appeler</a></div>
+<dialog id="lightbox" aria-label="Photographie agrandie"><button class="lightbox-close" type="button" aria-label="Fermer la photographie">Fermer ×</button><img src="" alt=""><p></p></dialog>
+</body></html>

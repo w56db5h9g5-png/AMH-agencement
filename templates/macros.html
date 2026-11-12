@@ -1,0 +1,8 @@
+{% macro photo(key, alt, css='', eager=false) -%}
+<img class="{{ css }}" src="{{ image_url(key,960) }}" srcset="{{ image_srcset(key) }}" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 60vw, 960px" width="{{ image_info(key)[0][0] }}" height="{{ image_info(key)[0][1] }}" alt="{{ alt }}" {% if eager %}fetchpriority="high" loading="eager"{% else %}loading="lazy"{% endif %} decoding="async">
+{%- endmacro %}
+{% macro project_card(p, index='') %}
+<article class="project-card"><a href="/realisations/{{ p.slug }}/" class="project-image">{{ photo(p.image,p.summary) }}<span class="project-open" aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a><div class="project-meta"><span>{{ categories[p.category] }}</span><span>{{ p.location }}</span></div><h3><a href="/realisations/{{ p.slug }}/">{{ p.title }}</a></h3></article>
+{% endmacro %}
+{% macro cta() %}<section class="cta-band"><div class="shell cta-inner"><div><span class="eyebrow">Et si nous en parlions ?</span><h2>Votre projet commence<br>par une rencontre.</h2></div><a class="button button-gold" href="/contact/">Parler de mon projet <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a></div></section>{% endmacro %}
+{% macro page_heading(eyebrow,title,intro) %}<div class="page-heading shell"><span class="eyebrow">{{ eyebrow }}</span><h1>{{ title }}</h1><p>{{ intro }}</p></div>{% endmacro %}
