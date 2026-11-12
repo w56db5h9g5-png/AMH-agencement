@@ -22,18 +22,19 @@
     }
   ],
   "checks": [
-    "Premium layout from the first version: split hero on desktop, stacked on mobile, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px",
+    "V6 art direction: centered logo on desktop, marine header, photographic hero, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px",
     "Mobile menu, Escape/focus restoration, FAQ",
     "Server filters, project details, lightbox and Escape",
     "Internal links, page headings and mobile layout on all principal pages",
     "Unconfigured SMTP returns 503, honest error, entered content retained",
     "Reduced motion: no entrance/reveal animations and no hover translation",
-    "Refined first-version navigation: mobile focus trap and scroll lock; desktop expertise menu, Escape and focus restoration"
+    "V6 navigation: mobile focus trap and scroll lock; desktop expertise menu, Escape and focus restoration",
+    "Expertise image preview follows pointer and keyboard focus; inactive scenes are hidden from assistive technology"
   ],
   "errors": [],
   "local_lab_metrics": {
-    "lcp": 64,
-    "cls": 7.943190586419754e-05,
-    "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured. Browser cache already populated by preceding scenarios."
+    "lcp": 56,
+    "cls": 0.0003286355779200424,
+    "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured. Browser cache already populated by preceding checks."
   }
 }

@@ -1,26 +1,19 @@
-# Nouvelle direction visuelle — base de la première version
+# AMH — direction V6
 
-La première composition (commit `874abdf`) sert de base : fond clair, hero en deux colonnes et photographie à droite. Le reste du site est retravaillé dans une direction éditoriale : grandes photographies, galeries décalées, hiérarchie typographique et rythme des espaces.
+La V5 reste disponible dans la branche `backup-v5` (commit `33add65`) et dans `AMH-PREMIUM-V5.zip`. Son empreinte est conservée dans `v5-backup.json`. L’archive V5 n’est ni remplacée ni reconstruite.
 
-## Couleurs de l’atelier
+## Composition
 
-Le bleu nuit `#061D32`, le bleu profond `#0E1A2E`, le doré `#C9A25E` et son ton de texte sombre `#967100` proviennent des styles du site AMH d’origine. Le logo est conservé. Les couleurs neutres servent aux fonds et à la lecture. La direction est définie dans `static/css/premium.css`, sans les surcharges successives de l’ancienne version plein écran.
+Une navigation symétrique avec le logo d’origine centré, un premier écran marine associé à une photographie claire de la salle à manger rue de Rivoli, un titre court et un double accès contact / réalisations. La sélection photographique utilise deux grands portraits décalés puis une composition paysage. Les savoir-faire se parcourent avec un aperçu sensible au survol et au focus clavier. Le parcours se poursuit par les matières, l’accompagnement, les questions fréquentes et la prise de contact.
 
-## Typographie
+La direction est définie dans `static/css/atelier.css`, qui remplace la feuille V5. Les deux polices locales restent Cormorant Garamond et Manrope. Le bleu `#061D32`, le bleu profond `#0E1A2E` et le doré `#C9A25E` de l’atelier structurent l’ensemble.
 
-Cormorant Garamond pour les titres et Manrope pour les textes. Fichiers locaux WOFF2, caractères latins/français, deux préchargements prioritaires, aucune requête Google Fonts au navigateur. Voir `fonts.md` et les licences dans `static/fonts/`.
+## Contenus et administration
 
-## Mise en page
+Le grand titre est éditable dans `hero_display_title` (une partie par ligne). La présentation de l’accueil, son introduction et son image principale restent éditables. Les anciens réglages héritent des nouveaux champs sans effacement des valeurs existantes. Les photographies ajoutées proviennent du site AMH d’origine ; sources dans `media-sources.json`. Aucun avis, label, nom de client ou chiffre commercial n’a été inventé.
 
-- Hero claire en deux colonnes sur ordinateur, empilée sur mobile.
-- Navigation issue de la première version, simplifiée ; menu mobile avec confinement du focus, fermeture par Échap et blocage du défilement de la page.
-- Portfolio décalé et fiches projets avec grand format photographique.
-- Savoir-faire présentés par des photographies et de courts textes.
-- Atelier, conseils et contact harmonisés avec les mêmes grilles et styles.
-- Micro-interactions limitées aux liens, boutons, photographies, champs et apparitions au défilement. Aucun contenu masqué dans l’attente du JavaScript ; réduction des mouvements respectée.
+Une sauvegarde locale de la base et des fichiers de données V5 a été créée dans `/workspace/AMH-backups/V5`, hors du dépôt. Elle contient la configuration de session et ne doit pas être publiée. Pour un retour complet sur cette machine, arrêter le serveur, sauvegarder l’état courant, restaurer ces données puis reprendre le code de `backup-v5`. L’archive hors connexion V5 suffit à retrouver exactement son aperçu visuel, sans toucher au serveur.
 
-L’administration, les contenus et le traitement du formulaire sont préservés. Aucune publication du site web n’est réalisée.
+## Livraison
 
-## V5 — présence du bleu marine
-
-Le bandeau éditorial et la légende photographique de la hero utilisent le bleu AMH `#061D32`, avec des textes clairs et des accents dorés. Les numéros d’étapes et les repères de savoir-faire sont également bleu marine. Les fonds clairs restent majoritaires. Contrôles navigateur sur l’entrée autonome V5 : couleurs calculées, texte blanc sur bandeau et absence de débordement à 1440 et 390 px ; aucune erreur JavaScript détectée.
+L’archive `AMH-ATELIER-V6.zip` contient `AMH-ATELIER-V6/OUVRIR-V6.html`. Cette entrée embarque styles, polices, photos jusqu’à 1600 px et interactions. Elle a été testée en bloquant toutes les requêtes réseau. Les autres pages sont incluses dans les sous-dossiers. Le formulaire reste désactivé dans l’export hors connexion. Aucun site public n’a été déployé.

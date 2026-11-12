@@ -185,6 +185,30 @@ class WebsiteTests(unittest.TestCase):
             self.assertEqual(response.mimetype,'image/webp')
         self.assertEqual(self.client.get('/media/session.key').status_code,404)
 
+    def test_legacy_site_settings_get_new_design_defaults(self):
+        import sqlite3
+        with sqlite3.connect(self.app.config['DATABASE']) as connection:
+            raw=connection.execute("SELECT data FROM documents WHERE kind='site' AND slug='settings'").fetchone()[0]
+            data=json.loads(raw);data.pop('hero_display_title',None)
+            connection.execute("UPDATE documents SET data=? WHERE kind='site' AND slug='settings'",(json.dumps(data),))
+        response=self.client.get('/')
+        self.assertEqual(response.status_code,200)
+        self.assertIn('Des lieux.',response.data.decode())
+
+    def test_new_headline_is_editable_and_cannot_be_empty(self):
+        import content
+        self.admin()
+        data=dict(content.SITE,slug='settings')
+        data['faq']=json.dumps(data['faq']);data['hero_display_title']='Un lieu.\nUne signature.'
+        with self.client.session_transaction() as state:data['csrf']=state['csrf']
+        self.assertEqual(self.client.post('/admin/edit/site/settings/',data=data).status_code,302)
+        response=self.client.get('/').data.decode()
+        self.assertIn('Un lieu.',response);self.assertIn('Une signature.',response)
+        data['hero_display_title']=''
+        response=self.client.post('/admin/edit/site/settings/',data=data)
+        self.assertIn('ne peuvent pas être vides',response.data.decode())
+        self.assertIn('Une signature.',self.client.get('/').data.decode())
+
     def test_headers_and_escaped_content(self):
         r=self.client.get('/');self.assertEqual(r.headers['X-Content-Type-Options'],'nosniff')
         self.assertIn("object-src 'none'",r.headers['Content-Security-Policy'])

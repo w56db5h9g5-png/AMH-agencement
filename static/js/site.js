@@ -30,7 +30,7 @@ document.addEventListener('keydown', event => {
 });
 document.addEventListener('click', event => { if (!event.target.closest('.header')) closeMenu(); });
 nav?.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
-window.matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 951px)').addEventListener('change', closeMenu);
 const dialog = document.getElementById('lightbox');
 let origin;
 document.querySelectorAll('[data-lightbox]').forEach(link => link.addEventListener('click', event => {
@@ -72,6 +72,22 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window && Element.protot
       revealObserver.unobserve(entry.target);
     }
   }, { threshold: 0.12 });
-  document.querySelectorAll('.section-heading, .project-card, .service-row, .atelier-copy, .steps-grid li, .article-card').forEach(element => revealObserver.observe(element));
+  document.querySelectorAll('.section-heading, .project-card, .craft-link, .material-copy, .steps-grid li, .article-card').forEach(element => revealObserver.observe(element));
 }
 reducedMotion.addEventListener('change', event => { if (event.matches) stopReveals(); });
+
+// An expertise preview responds equally to pointer and keyboard focus.
+const craftLinks = document.querySelectorAll('[data-craft-index]');
+const craftScenes = document.querySelectorAll('[data-craft-scene]');
+function showCraft(index) {
+  craftLinks.forEach(link => link.classList.toggle('is-active', link.dataset.craftIndex === index));
+  craftScenes.forEach(scene => {
+    const active = scene.dataset.craftScene === index;
+    scene.classList.toggle('is-active', active);
+    scene.setAttribute('aria-hidden', String(!active));
+  });
+}
+craftLinks.forEach(link => {
+  link.addEventListener('pointerenter', () => showCraft(link.dataset.craftIndex));
+  link.addEventListener('focus', () => showCraft(link.dataset.craftIndex));
+});

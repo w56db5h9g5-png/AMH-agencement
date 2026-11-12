@@ -90,7 +90,9 @@ def create_app(test_config=None):
     def get_doc(kind, slug):
         with db() as c:
             row = c.execute('SELECT data FROM documents WHERE kind=? AND slug=?', (kind, slug)).fetchone()
-        return json.loads(row['data']) if row else None
+        if not row:return None
+        data=json.loads(row['data'])
+        return {**content.SITE,**data} if kind=='site' else data
 
     def get_docs(kind):
         with db() as c:
@@ -428,6 +430,8 @@ def create_app(test_config=None):
                 if kind in ['project','service'] and updated['category'] not in content.CATEGORIES:raise ValueError('Catégorie invalide.')
                 # Preserve the seed schema: templates rely on known field types.
                 if kind=='site':
+                    if not updated['hero_display_title'] or not updated['hero_title']:
+                        raise ValueError('Les titres de l’accueil ne peuvent pas être vides.')
                     if not all(isinstance(q,dict) and isinstance(q.get('question'),str) and isinstance(q.get('answer'),str) for q in updated['faq']):raise ValueError('FAQ : question et answer sont obligatoires.')
                     for key in ['social_instagram','social_linkedin']:
                         if updated[key] and urlsplit(updated[key]).scheme!='https':raise ValueError('Les réseaux sociaux doivent utiliser HTTPS.')

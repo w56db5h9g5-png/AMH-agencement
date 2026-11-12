@@ -12,23 +12,23 @@
 <link rel="preload" href="{{ url_for('static',filename='fonts/atelier-1.woff2') }}" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{{ url_for('static',filename='fonts/atelier-3.woff2') }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ url_for('static',filename='css/site.css') }}">
-<link rel="stylesheet" href="{{ url_for('static',filename='css/premium.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/atelier.css') }}">
 <script src="{{ url_for('static',filename='js/site.js') }}" defer></script>
 <script type="application/ld+json">{{ {'@context':'https://schema.org','@type':'Organization','name':site.name,'url':site_origin,'logo':site_origin+url_for('static',filename='images/logo.png')}|tojson }}</script>
 {% block head %}{% endblock %}
 </head>
-<body>
+<body class="{{ 'home-page' if request.endpoint=='home' else 'inner-page' }}">
 <a class="skip-link" href="#main">Aller au contenu</a>
-<header class="header"><div class="shell header-inner">
-<a class="brand" href="/" aria-label="AMH Agencement — Accueil"><img src="{{ url_for('static',filename='images/logo.png') }}" width="978" height="418" alt="AMH"><span>AGENCEMENT</span></a>
+<header class="header maison-header"><div class="shell header-inner">
+<a class="brand header-brand" href="/" aria-label="AMH Agencement — Accueil"><img src="{{ url_for('static',filename='images/logo.png') }}" width="978" height="418" alt="AMH"><span>AGENCEMENT</span></a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation"><span class="menu-label">Menu</span><span class="menu-symbol" aria-hidden="true"><i></i><i></i></span></button>
-<nav id="navigation" class="navigation" aria-label="Navigation principale">
-<a href="/realisations/" {% if request.path.startswith('/realisations/') %}aria-current="page"{% endif %}>Réalisations</a>
+<nav id="navigation" class="navigation" aria-label="Navigation principale"><div class="nav-left">
 <a href="/la-societe/" {% if request.path=='/la-societe/' %}aria-current="page"{% endif %}>L’Atelier</a>
-<details class="nav-expertises"><summary>Savoir-faire <span aria-hidden="true">⌄</span></summary><div class="nav-dropdown">{% for s in services %}<a href="/{{ s.slug }}/">{{ s.short }}</a>{% endfor %}</div></details>
-<a href="/blog/" {% if request.path.startswith('/blog/') %}aria-current="page"{% endif %}>Le carnet</a>
-<a class="button button-small" href="/contact/">Votre projet <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
-<div class="nav-mobile-contact"><span>Parlons de votre projet.</span><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a><a href="mailto:{{ site.email }}">{{ site.email }}</a><p>Paris · Atelier à Bagnolet</p></div></nav></div></header>
+<details class="nav-expertises"><summary>Savoir-faire <span class="nav-chevron" aria-hidden="true"></span></summary><div class="nav-dropdown">{% for s in services %}<a href="/{{ s.slug }}/"><span class="nav-index">{{ s.number }}</span>{{ s.short }}</a>{% endfor %}</div></details>
+<a href="/blog/" {% if request.path.startswith('/blog/') %}aria-current="page"{% endif %}>Le carnet</a></div>
+<div class="nav-right"><a href="/realisations/" {% if request.path.startswith('/realisations/') %}aria-current="page"{% endif %}>Réalisations</a>
+<a class="button nav-project" href="/contact/">Parlons de votre projet <svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div>
+<div class="nav-mobile-contact"><span>Un premier échange.</span><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a><a href="mailto:{{ site.email }}">{{ site.email }}</a><p>Paris · Atelier à Bagnolet</p></div></nav></div></header>
 <main id="main">{% block content %}{% endblock %}</main>
 {% block before_footer %}{% endblock %}
 <footer class="footer"><div class="shell"><div class="footer-top"><a class="brand brand-footer" href="/"><img src="{{ url_for('static',filename='images/logo.png') }}" width="978" height="418" alt="AMH Agencement"><span>AGENCEMENT</span></a><p>De la matière à l’espace.<br>Un projet à votre mesure.</p><a class="text-link" href="/contact/">Construisons la suite <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a></div>

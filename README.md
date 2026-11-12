@@ -93,4 +93,6 @@ python3 tests/browser.py
 
 Dans une autre machine, installer Playwright dans un environnement de test et son Chromium avec les instructions officielles ; `CHROMIUM_PATH` désigne l’exécutable et `TEST_BASE_URL` l’origine de test. Les dépendances de test navigateur sont dans `requirements-browser.txt`. Le script vérifie le comportement SMTP non configuré : le lancer sur un environnement de test sans SMTP réel. Les captures et le rapport JSON sont écrits dans `/tmp/amh-browser` (`TEST_ARTIFACTS` permet de changer ce chemin).
 
+La sauvegarde V5 est dans la branche `backup-v5` et son ZIP reste `AMH-PREMIUM-V5.zip`. La nouvelle livraison est `AMH-ATELIER-V6.zip`, entrée `OUVRIR-V6.html`. Voir `docs/branding.md` pour les choix visuels et la sauvegarde des données.
+
 Voir `docs/rapport-validation.md`, `docs/redirections.csv` et `docs/validation-editoriale.md` pour les preuves et les limites. Aucun déploiement ou changement du site public n’a été effectué.

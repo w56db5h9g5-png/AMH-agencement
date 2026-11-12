@@ -6,7 +6,7 @@ Site Flask/Jinja rendu côté serveur, administration SQLite, pages publiques, f
 
 ## Tests serveur
 
-18 tests automatisés passent avec `python -m unittest discover -s tests -v` :
+20 tests automatisés passent avec `python -m unittest discover -s tests -v` :
 
 - Toutes les pages du sitemap répondent, avec un H1 et des ressources locales accessibles.
 - Filtres rendus côté serveur, pages absentes en 404 et redirections permanentes.
@@ -17,6 +17,7 @@ Site Flask/Jinja rendu côté serveur, administration SQLite, pages publiques, f
 - Protection antispam et limitation des tentatives.
 - Authentification, édition persistante, création et suppression après redémarrage.
 - Validation des structures éditoriales, import et distribution des médias.
+- Reprise des réglages anciens sans le nouveau champ de titre ; édition du titre et rejet d’un titre vide.
 - Échappement des textes, en-têtes de sécurité et désactivation de l’indexation en préproduction.
 
 ## Navigateur Chromium
@@ -24,8 +25,8 @@ Site Flask/Jinja rendu côté serveur, administration SQLite, pages publiques, f
 Exécuté avec Playwright sur le serveur Gunicorn local :
 
 - Accueil aux largeurs 360, 390, 768 et 1440 px : aucun débordement horizontal, photographies effectivement chargées après défilement.
-- Retour à la composition de la première version : hero en deux colonnes sur ordinateur, empilée sur mobile, navigation épurée, polices locales chargées et absence de débordement.
-- Micro-interactions discrètes et apparitions au défilement ; désactivation vérifiée avec `prefers-reduced-motion`.
+- V6 : navigation au logo centré sur ordinateur, signature marine, nouvelle photographie et hiérarchie du premier écran. Aucun débordement à 360, 390, 768 et 1440 px ; polices et images effectivement chargées.
+- Micro-interactions discrètes et apparitions au défilement ; désactivation vérifiée avec `prefers-reduced-motion`. Aperçu des savoir-faire vérifié au pointeur et au clavier, avec synchronisation de l’état accessible des images.
 - Menu mobile : ouverture, fermeture avec Échap et restitution du focus.
 - FAQ, filtres, accès aux fiches et agrandissement des photos ; fermeture du dialogue avec Échap.
 - Pages principales : liens internes, H1 et absence de débordement sur mobile.
@@ -38,8 +39,8 @@ Captures : `apercu-ordinateur.png` et `apercu-mobile.png`. Rapport machine : `br
 
 Dernière mesure via PerformanceObserver dans Chromium, sur la machine locale, écran 1440 × 1000, sans ralentissement réseau/CPU et avec un cache navigateur déjà alimenté par les scénarios précédents :
 
-- LCP : 64 ms.
-- CLS : 0.000079.
+- LCP : 56 ms.
+- CLS : 0.000329.
 - INP : non mesuré.
 
 Ces valeurs ne démontrent pas le respect des Core Web Vitals en production. Aucun score Lighthouse ni audit d’accessibilité exhaustif n’est revendiqué. Les objectifs doivent être vérifiés sur l’hébergement cible et avec des appareils réels.
@@ -49,3 +50,7 @@ Ces valeurs ne démontrent pas le respect des Core Web Vitals en production. Auc
 Aucun message n’a été envoyé à AMH. SMTP réel, remise finale en boîte, domaine, HTTPS public, sauvegarde/restauration de production, contenus légaux, validité des certifications et droits photographiques restent à configurer ou valider. L’administration exige un hash de mot de passe fourni par le propriétaire. La version reste en noindex par défaut.
 
 Aucune publication, modification DNS ou modification du site AMH existant n’a été effectuée.
+
+## Archive autonome V6
+
+Accueil rendu avec toutes les requêtes réseau bloquées : photographie 1600 px, police locale intégrée, style marine, menu mobile et aperçu interactif des savoir-faire fonctionnels. Aucune erreur JavaScript détectée. V5 conservée dans une branche et un ZIP distincts, avec contrôle de l’empreinte de son archive.
