@@ -20,3 +20,7 @@ Cormorant Garamond pour les titres et Manrope pour les textes. Fichiers locaux W
 - Micro-interactions limitées aux liens, boutons, photographies, champs et apparitions au défilement. Aucun contenu masqué dans l’attente du JavaScript ; réduction des mouvements respectée.
 
 L’administration, les contenus et le traitement du formulaire sont préservés. Aucune publication du site web n’est réalisée.
+
+## V5 — présence du bleu marine
+
+Le bandeau éditorial et la légende photographique de la hero utilisent le bleu AMH `#061D32`, avec des textes clairs et des accents dorés. Les numéros d’étapes et les repères de savoir-faire sont également bleu marine. Les fonds clairs restent majoritaires. Contrôles navigateur sur l’entrée autonome V5 : couleurs calculées, texte blanc sur bandeau et absence de débordement à 1440 et 390 px ; aucune erreur JavaScript détectée.

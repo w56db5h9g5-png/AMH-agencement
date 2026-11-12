@@ -6,7 +6,9 @@ import re
 import sys
 
 root=Path(sys.argv[1]).resolve()
-output=root/'OUVRIR-V4.html'
+version=sys.argv[2] if len(sys.argv)>2 else 'V4'
+if not re.fullmatch(r'V[0-9]+',version):raise ValueError('Invalid version')
+output=root/f'OUVRIR-{version}.html'
 
 def data_uri(path):
     path=path.resolve()
@@ -27,8 +29,8 @@ page=re.sub(r'<link rel="icon"[^>]+>','',page)
 page=re.sub(r'<script src="([^"]+)" defer></script>',lambda m:'<script>document.addEventListener("DOMContentLoaded", () => {\n'+(root/m[1]).read_text()+'\n});</script>',page)
 page=re.sub(r'\s+srcset="[^"]*"','',page)
 page=re.sub(r'\ssrc="(static/[^"]+)"',lambda m:' src="'+data_uri(root/m[1])+'"',page)
-page=re.sub(r'<title>.*?</title>','<title>AMH — APERÇU PREMIUM V4 — hero en deux colonnes</title>',page,count=1)
-page=page.replace('<head>','<head>\n<meta name="amh-preview-version" content="V4 — contenu autonome — base premium en deux colonnes">',1)
+page=re.sub(r'<title>.*?</title>',f'<title>AMH — APERÇU PREMIUM {version} — hero en deux colonnes</title>',page,count=1)
+page=page.replace('<head>',f'<head>\n<meta name="amh-preview-version" content="{version} — contenu autonome — base premium en deux colonnes">',1)
 licenses='\n\n'.join(p.read_text() for p in (root/'static'/'fonts').glob('LICENSE-*.txt'))
 page=page.replace('</body>','<script type="text/plain" id="font-licenses">'+licenses+'</script>\n</body>')
 assert 'premium-hero' in page and 'hero-full' not in page
