@@ -1,16 +1,22 @@
-# Identité et interactions AMH
+# Nouvelle direction visuelle — base de la première version
 
-Palette relevée dans les styles publics du site d’origine le 12 novembre 2026 :
+La première composition (commit `874abdf`) sert de base : fond clair, hero en deux colonnes et photographie à droite. Le reste du site est retravaillé dans une direction éditoriale : grandes photographies, galeries décalées, hiérarchie typographique et rythme des espaces.
 
-- Bleu nuit `#061D32` : en-tête Elementor 788.
-- Bleu profond `#0E1A2E` : `.amh-footer-v2` et barre mobile.
-- Doré `#C9A25E` : liens, accents et boutons.
-- Doré sombre `#967100` : déjà présent sur le site, utilisé pour le texte sur fond clair.
-- Crème `#F9F6F1` : fond de blog d’origine, utilisé pour les sections secondaires.
-- Blanc `#FFFFFF` : fonds et texte sur bleu.
+## Couleurs de l’atelier
 
-La couche `static/css/branding.css` applique ces couleurs. Le logo d’origine est conservé.
+Le bleu nuit `#061D32`, le bleu profond `#0E1A2E`, le doré `#C9A25E` et son ton de texte sombre `#967100` proviennent des styles du site AMH d’origine. Le logo est conservé. Les couleurs neutres servent aux fonds et à la lecture. La direction est définie dans `static/css/premium.css`, sans les surcharges successives de l’ancienne version plein écran.
 
-La hero utilise une photographie locale sur toute sa surface, avec dégradé bleu nuit, texte et deux CTA. L’image source originale de 1600 px remplace la précédente version réduite.
+## Typographie
 
-Micro-interactions : déplacement léger des flèches, retour visuel des boutons, zoom doux des photographies, état de focus des champs, entrée de la hero et apparitions au défilement. Les contenus ne sont jamais masqués dans l’attente du JavaScript. La préférence de réduction des mouvements désactive les animations ; un changement de préférence en cours de visite interrompt également les animations actives.
+Cormorant Garamond pour les titres et Manrope pour les textes. Fichiers locaux WOFF2, caractères latins/français, deux préchargements prioritaires, aucune requête Google Fonts au navigateur. Voir `fonts.md` et les licences dans `static/fonts/`.
+
+## Mise en page
+
+- Hero claire en deux colonnes sur ordinateur, empilée sur mobile.
+- Navigation issue de la première version, simplifiée ; menu mobile avec confinement du focus, fermeture par Échap et blocage du défilement de la page.
+- Portfolio décalé et fiches projets avec grand format photographique.
+- Savoir-faire présentés par des photographies et de courts textes.
+- Atelier, conseils et contact harmonisés avec les mêmes grilles et styles.
+- Micro-interactions limitées aux liens, boutons, photographies, champs et apparitions au défilement. Aucun contenu masqué dans l’attente du JavaScript ; réduction des mouvements respectée.
+
+L’administration, les contenus et le traitement du formulaire sont préservés. Aucune publication du site web n’est réalisée.

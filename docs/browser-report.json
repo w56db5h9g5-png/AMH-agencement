@@ -22,17 +22,18 @@
     }
   ],
   "checks": [
-    "Full-width hero and original brand colors at 360, 390, 768, 1440px; all images loaded; no overflow",
+    "Premium layout from the first version: split hero on desktop, stacked on mobile, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px",
     "Mobile menu, Escape/focus restoration, FAQ",
     "Server filters, project details, lightbox and Escape",
     "Internal links, page headings and mobile layout on all principal pages",
     "Unconfigured SMTP returns 503, honest error, entered content retained",
-    "Reduced motion: no entrance/reveal animations and no hover translation"
+    "Reduced motion: no entrance/reveal animations and no hover translation",
+    "Refined first-version navigation: mobile focus trap and scroll lock; desktop expertise menu, Escape and focus restoration"
   ],
   "errors": [],
   "local_lab_metrics": {
-    "lcp": 96,
-    "cls": 0,
-    "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured."
+    "lcp": 64,
+    "cls": 7.943190586419754e-05,
+    "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured. Browser cache already populated by preceding scenarios."
   }
 }

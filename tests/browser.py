@@ -19,12 +19,16 @@ with sync_playwright() as p:
         assert page.locator('h1').count()==1
         dimensions=page.evaluate('({viewport:innerWidth,content:document.documentElement.scrollWidth})')
         assert dimensions['content']<=width,dimensions
-        hero=page.locator('.hero-full').bounding_box()
+        hero=page.locator('.premium-hero').bounding_box()
         image=page.locator('.hero-photo').bounding_box()
-        assert round(hero['width'])==width and image['width']>=width-1
-        assert hero['height']>=640
-        assert page.locator('.header').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(6, 29, 50)'
-        assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(201, 162, 94)'
+        copy=page.locator('.hero-copy').bounding_box()
+        if width>700:
+            assert image['x']>copy['x']+copy['width']-1
+        else:
+            assert image['y']>copy['y']+copy['height']-1
+        assert page.locator('.header').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(250, 248, 244)'
+        assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(6, 29, 50)'
+        assert page.evaluate("(font) => document.fonts.check(font)", '400 16px "Cormorant Garamond"')
         for y in range(0,page.evaluate('document.documentElement.scrollHeight'),650):
             page.evaluate('(y)=>scrollTo(0,y)',y);page.wait_for_timeout(80)
         page.wait_for_timeout(250)
@@ -34,10 +38,14 @@ with sync_playwright() as p:
         if width in [1440,390]:
             page.screenshot(path=str(OUT/f'home-{width}.png'),full_page=True)
             page.screenshot(path=str(OUT/f'first-screen-{width}.png'))
-    report['checks'].append('Full-width hero and original brand colors at 360, 390, 768, 1440px; all images loaded; no overflow')
+    report['checks'].append('Premium layout from the first version: split hero on desktop, stacked on mobile, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px')
     page.goto(BASE,wait_until='networkidle')
     button=page.get_by_role('button',name='Menu',exact=False)
     button.click();assert button.get_attribute('aria-expanded')=='true'
+    assert page.locator('body').evaluate('(e)=>getComputedStyle(e).overflow')=='hidden'
+    page.locator('.nav-mobile-contact a').last.focus();page.keyboard.press('Tab')
+    assert page.locator(':focus').get_attribute('class')=='brand'
+    page.screenshot(path=str(OUT/'navigation-mobile.png'))
     page.keyboard.press('Escape');assert button.get_attribute('aria-expanded')=='false'
     assert page.locator(':focus').get_attribute('class')=='menu-toggle'
     page.locator('.faq-list summary').first.click()
@@ -81,6 +89,15 @@ with sync_playwright() as p:
     page.emulate_media(reduced_motion='no-preference')
     assert not report['errors'],report['errors']
     page.set_viewport_size({'width':1440,'height':1000})
+    page.goto(BASE,wait_until='networkidle')
+    page.locator('.nav-expertises summary').click()
+    assert page.locator('.nav-dropdown a').count()==4
+    assert page.locator('.nav-dropdown').is_visible()
+    page.screenshot(path=str(OUT/'navigation-desktop.png'))
+    page.keyboard.press('Escape')
+    assert page.locator('.nav-expertises').get_attribute('open') is None
+    assert page.locator(':focus').evaluate('(e)=>e.tagName')=='SUMMARY'
+    report['checks'].append('Refined first-version navigation: mobile focus trap and scroll lock; desktop expertise menu, Escape and focus restoration')
     page.goto(BASE,wait_until='networkidle');page.wait_for_timeout(500)
     report['local_lab_metrics']=page.evaluate('window.__metrics')
     report['local_lab_metrics']['conditions']='Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured.'

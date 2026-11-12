@@ -42,6 +42,7 @@ def create_app(test_config=None):
         SECRET_KEY=os.environ.get('SECRET_KEY') or keyfile.read_text(),
         DATABASE=str(data_dir / 'content.sqlite3'),
         DATA_DIR=str(data_dir),
+        TEMPLATES_AUTO_RELOAD=os.environ.get('TEMPLATES_AUTO_RELOAD')=='1',
         MAX_CONTENT_LENGTH=16 * 1024 * 1024,
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SAMESITE='Lax',

@@ -1,11 +1,36 @@
 'use strict';
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.getElementById('navigation');
-function closeMenu() { if (!toggle || !nav) return; toggle.setAttribute('aria-expanded', 'false'); nav.classList.remove('is-open'); }
-toggle?.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); nav.classList.toggle('is-open', open); });
-document.addEventListener('keydown', event => { if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); } });
+const expertises = document.querySelector('.nav-expertises');
+function closeMenu() {
+  if (!toggle || !nav) return;
+  toggle.setAttribute('aria-expanded', 'false');
+  nav.classList.remove('is-open');
+  document.body.classList.remove('nav-open');
+  expertises?.removeAttribute('open');
+}
+toggle?.addEventListener('click', () => {
+  const open = toggle.getAttribute('aria-expanded') !== 'true';
+  if (!open) { closeMenu(); return; }
+  toggle.setAttribute('aria-expanded', 'true');
+  nav.classList.add('is-open');
+  document.body.classList.add('nav-open');
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    if (toggle?.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); }
+    else if (expertises?.open) { expertises.removeAttribute('open'); expertises.querySelector('summary').focus(); }
+  }
+  if (event.key === 'Tab' && toggle?.getAttribute('aria-expanded') === 'true') {
+    const elements = Array.from(document.querySelectorAll('.header a, .header button, .header summary')).filter(el => el.getClientRects().length);
+    const first = elements[0], last = elements[elements.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+});
 document.addEventListener('click', event => { if (!event.target.closest('.header')) closeMenu(); });
-window.matchMedia('(min-width: 701px)').addEventListener('change', closeMenu);
+nav?.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+window.matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
 const dialog = document.getElementById('lightbox');
 let origin;
 document.querySelectorAll('[data-lightbox]').forEach(link => link.addEventListener('click', event => {

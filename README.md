@@ -1,6 +1,6 @@
 # AMH Agencement — refonte
 
-Site rendu côté serveur avec **Flask, Jinja et SQLite**, CSS et JavaScript natifs. Ce choix garde l’installation légère, rend les contenus disponibles sans JavaScript et fournit une administration sans abonnement à un CMS externe. Les photographies existantes sont stockées localement en WebP. Aucune police ou ressource tierce n’est chargée au navigateur.
+Site rendu côté serveur avec **Flask, Jinja et SQLite**, CSS et JavaScript natifs. Ce choix garde l’installation légère, rend les contenus disponibles sans JavaScript et fournit une administration sans abonnement à un CMS externe. Les photographies existantes sont stockées localement en WebP. Les deux polices (Cormorant Garamond et Manrope) sont optimisées en WOFF2 et hébergées localement ; aucune ressource distante n’est demandée par le navigateur.
 
 ## Démarrer
 
@@ -12,7 +12,7 @@ python3 -m venv .venv
 .venv/bin/gunicorn --bind 0.0.0.0:3000 --workers 2 --threads 2 --timeout 60 app:app
 ```
 
-Développement avec rechargement : ajouter `--reload`. `python app.py` fonctionne également dans l’environnement virtuel, sans activer le débogueur public. Le point `/healthz` vérifie l’accès à SQLite.
+Développement avec rechargement : ajouter `--reload` et définir `TEMPLATES_AUTO_RELOAD=1` pour actualiser aussi les templates HTML. `python app.py` fonctionne également dans l’environnement virtuel, sans activer le débogueur public. Le point `/healthz` vérifie l’accès à SQLite.
 
 Les dépendances directes sont décrites dans `requirements.txt`, les versions installées dans `requirements.lock.txt`. Aucun build Node n’est nécessaire. Les images optimisées sont déjà dans le dépôt.
 
