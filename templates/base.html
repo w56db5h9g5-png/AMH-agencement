@@ -7,9 +7,10 @@
 <meta property="og:locale" content="fr_FR"><meta property="og:type" content="website"><meta property="og:site_name" content="AMH Agencement">
 <meta property="og:title" content="{{ meta_title }}"><meta property="og:description" content="{{ meta_description }}"><meta property="og:url" content="{{ canonical }}">
 <meta property="og:image" content="{{ site_origin }}{{ image_url(site.hero_image,1600) }}"><meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#102d35">
+<meta name="theme-color" content="#061d32">
 <link rel="icon" href="{{ url_for('static',filename='images/favicon.svg') }}" type="image/svg+xml">
 <link rel="stylesheet" href="{{ url_for('static',filename='css/site.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/branding.css') }}">
 <script src="{{ url_for('static',filename='js/site.js') }}" defer></script>
 <script type="application/ld+json">{{ {'@context':'https://schema.org','@type':'Organization','name':site.name,'url':site_origin,'logo':site_origin+url_for('static',filename='images/logo.png')}|tojson }}</script>
 {% block head %}{% endblock %}

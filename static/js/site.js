@@ -28,3 +28,25 @@ files?.addEventListener('change', () => {
 });
 const error = document.querySelector('.error-summary');
 if (error?.hasAttribute('tabindex')) error.focus();
+
+// Reveal at the viewport edge without hiding content or requiring JavaScript to read it.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let revealObserver;
+function stopReveals() {
+  revealObserver?.disconnect();
+  document.getAnimations().forEach(animation => animation.cancel());
+}
+if (!reducedMotion.matches && 'IntersectionObserver' in window && Element.prototype.animate) {
+  revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.animate([
+        { opacity: 0.45, transform: 'translateY(14px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], { duration: 480, easing: 'cubic-bezier(.2,.65,.2,1)' });
+      revealObserver.unobserve(entry.target);
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.section-heading, .project-card, .service-row, .atelier-copy, .steps-grid li, .article-card').forEach(element => revealObserver.observe(element));
+}
+reducedMotion.addEventListener('change', event => { if (event.matches) stopReveals(); });

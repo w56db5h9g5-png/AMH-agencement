@@ -22,15 +22,16 @@
     }
   ],
   "checks": [
-    "All homepage images loaded; no overflow at 360, 390, 768, 1440px",
+    "Full-width hero and original brand colors at 360, 390, 768, 1440px; all images loaded; no overflow",
     "Mobile menu, Escape/focus restoration, FAQ",
     "Server filters, project details, lightbox and Escape",
     "Internal links, page headings and mobile layout on all principal pages",
-    "Unconfigured SMTP returns 503, honest error, entered content retained"
+    "Unconfigured SMTP returns 503, honest error, entered content retained",
+    "Reduced motion: no entrance/reveal animations and no hover translation"
   ],
   "errors": [],
   "local_lab_metrics": {
-    "lcp": 56,
+    "lcp": 96,
     "cls": 0,
     "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured."
   }

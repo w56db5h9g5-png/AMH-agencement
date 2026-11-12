@@ -19,6 +19,12 @@ with sync_playwright() as p:
         assert page.locator('h1').count()==1
         dimensions=page.evaluate('({viewport:innerWidth,content:document.documentElement.scrollWidth})')
         assert dimensions['content']<=width,dimensions
+        hero=page.locator('.hero-full').bounding_box()
+        image=page.locator('.hero-photo').bounding_box()
+        assert round(hero['width'])==width and image['width']>=width-1
+        assert hero['height']>=640
+        assert page.locator('.header').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(6, 29, 50)'
+        assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(201, 162, 94)'
         for y in range(0,page.evaluate('document.documentElement.scrollHeight'),650):
             page.evaluate('(y)=>scrollTo(0,y)',y);page.wait_for_timeout(80)
         page.wait_for_timeout(250)
@@ -28,7 +34,7 @@ with sync_playwright() as p:
         if width in [1440,390]:
             page.screenshot(path=str(OUT/f'home-{width}.png'),full_page=True)
             page.screenshot(path=str(OUT/f'first-screen-{width}.png'))
-    report['checks'].append('All homepage images loaded; no overflow at 360, 390, 768, 1440px')
+    report['checks'].append('Full-width hero and original brand colors at 360, 390, 768, 1440px; all images loaded; no overflow')
     page.goto(BASE,wait_until='networkidle')
     button=page.get_by_role('button',name='Menu',exact=False)
     button.click();assert button.get_attribute('aria-expanded')=='true'
@@ -66,6 +72,13 @@ with sync_playwright() as p:
     assert page.get_by_role('alert').is_visible()
     assert 'n’a pas été envoyée' in page.get_by_role('alert').inner_text()
     report['checks'].append('Unconfigured SMTP returns 503, honest error, entered content retained')
+    page.emulate_media(reduced_motion='reduce')
+    page.goto(BASE,wait_until='networkidle')
+    assert page.evaluate('document.getAnimations().length')==0
+    page.locator('.hero-actions .button').hover()
+    assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).transform')=='none'
+    report['checks'].append('Reduced motion: no entrance/reveal animations and no hover translation')
+    page.emulate_media(reduced_motion='no-preference')
     assert not report['errors'],report['errors']
     page.set_viewport_size({'width':1440,'height':1000})
     page.goto(BASE,wait_until='networkidle');page.wait_for_timeout(500)

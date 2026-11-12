@@ -24,6 +24,8 @@ Site Flask/Jinja rendu côté serveur, administration SQLite, pages publiques, f
 Exécuté avec Playwright sur le serveur Gunicorn local :
 
 - Accueil aux largeurs 360, 390, 768 et 1440 px : aucun débordement horizontal, photographies effectivement chargées après défilement.
+- Hero bord à bord, hauteur de premier écran adaptée, texte et CTA superposés ; couleurs originales vérifiées dans les styles calculés.
+- Animations d’entrée et au défilement, transitions de boutons et de liens ; désactivation vérifiée avec `prefers-reduced-motion`.
 - Menu mobile : ouverture, fermeture avec Échap et restitution du focus.
 - FAQ, filtres, accès aux fiches et agrandissement des photos ; fermeture du dialogue avec Échap.
 - Pages principales : liens internes, H1 et absence de débordement sur mobile.
@@ -36,7 +38,7 @@ Captures : `apercu-ordinateur.png` et `apercu-mobile.png`. Rapport machine : `br
 
 Dernière mesure via PerformanceObserver dans Chromium, sur la machine locale, écran 1440 × 1000, sans ralentissement réseau/CPU :
 
-- LCP : 56 ms.
+- LCP : 96 ms.
 - CLS : 0.
 - INP : non mesuré.
 
