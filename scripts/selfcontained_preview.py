@@ -6,7 +6,7 @@ import re
 import sys
 
 root=Path(sys.argv[1]).resolve()
-version=sys.argv[2] if len(sys.argv)>2 else 'V6'
+version=sys.argv[2] if len(sys.argv)>2 else 'V7'
 if not re.fullmatch(r'V[0-9]+',version):raise ValueError('Invalid version')
 output=root/f'OUVRIR-{version}.html'
 

@@ -421,7 +421,7 @@ def create_app(test_config=None):
                     else:updated[key]=value.strip()
                 if 'title' in updated and not updated['title']:
                     raise ValueError('Le titre ne peut pas être vide.')
-                for image_key in ['image','hero_image']:
+                for image_key in ['image','hero_image','hero_v7_image']:
                     if image_key in updated and (not re.fullmatch('[a-zA-Z0-9_-]+',updated[image_key]) or not image_path(updated[image_key],960).exists()):
                         raise ValueError('Nom d’image introuvable : '+image_key)
                 if not re.fullmatch('[a-z0-9]+(?:-[a-z0-9]+)*',updated['slug']):raise ValueError('Adresse : lettres minuscules, chiffres et tirets uniquement.')

@@ -22,16 +22,18 @@ with sync_playwright() as p:
         hero=page.locator('.premium-hero').bounding_box()
         image=page.locator('.hero-photo').bounding_box()
         copy=page.locator('.hero-copy').bounding_box()
-        assert round(hero['width'])==width
+        assert hero['width']<width
         if width>700:
-            assert image['width']>=width*.65
+            assert image['x']>=copy['x']+copy['width']-1
         else:
-            assert image['y']<copy['y']
+            assert image['y']>=copy['y']+copy['height']-1
         assert page.locator('.header').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(6, 29, 50)'
-        assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(249, 246, 241)'
+        assert page.locator('.hero-actions .button').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(6, 29, 50)'
         if width>950:
             logo=page.locator('.header-brand').bounding_box()
             assert abs(logo['x']+logo['width']/2-width/2)<2
+        assert page.locator('.hero-photo').get_attribute('src').endswith('/rivoli-960.webp')
+        assert page.locator('.selection-section').is_visible()
         assert page.evaluate("(font) => document.fonts.check(font)", '400 16px "Cormorant Garamond"')
         for y in range(0,page.evaluate('document.documentElement.scrollHeight'),650):
             page.evaluate('(y)=>scrollTo(0,y)',y);page.wait_for_timeout(80)
@@ -42,7 +44,7 @@ with sync_playwright() as p:
         if width in [1440,390]:
             page.screenshot(path=str(OUT/f'home-{width}.png'),full_page=True)
             page.screenshot(path=str(OUT/f'first-screen-{width}.png'))
-    report['checks'].append('V6 art direction: centered logo on desktop, marine header, photographic hero, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px')
+    report['checks'].append('V7: V5 split hero and photo, V6 centered navigation and remaining sections; all images loaded; no overflow at 360, 390, 768, 1440px')
     page.goto(BASE,wait_until='networkidle')
     button=page.get_by_role('button',name='Menu',exact=False)
     button.click();assert button.get_attribute('aria-expanded')=='true'

@@ -5,6 +5,7 @@ SITE = {
  'office':'26 bis rue Planchat, 75020 Paris',
  'hero_title':'Menuiserie et agencement sur mesure à Paris',
  'hero_intro':'Des espaces pensés pour vous. Des ouvrages fabriqués dans notre atelier à Bagnolet, puis installés chez vous.',
+ 'hero_v7_image':'rivoli',
  'hero_display_title':'Des lieux.\nÀ votre mesure.',
  'hero_image':'rivoli-salle',
  'home_intro':'Un intérieur se construit dans les détails. Une matière, une proportion, une façon de laisser entrer la lumière. Nous concevons et réalisons des agencements qui trouvent naturellement leur place dans votre quotidien.',

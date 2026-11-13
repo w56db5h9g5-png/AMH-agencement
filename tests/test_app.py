@@ -193,18 +193,18 @@ class WebsiteTests(unittest.TestCase):
             connection.execute("UPDATE documents SET data=? WHERE kind='site' AND slug='settings'",(json.dumps(data),))
         response=self.client.get('/')
         self.assertEqual(response.status_code,200)
-        self.assertIn('Des lieux.',response.data.decode())
+        self.assertIn('Menuiserie et agencement sur mesure à Paris',response.data.decode())
 
     def test_new_headline_is_editable_and_cannot_be_empty(self):
         import content
         self.admin()
         data=dict(content.SITE,slug='settings')
-        data['faq']=json.dumps(data['faq']);data['hero_display_title']='Un lieu.\nUne signature.'
+        data['faq']=json.dumps(data['faq']);data['hero_title']='Un lieu. Une signature.'
         with self.client.session_transaction() as state:data['csrf']=state['csrf']
         self.assertEqual(self.client.post('/admin/edit/site/settings/',data=data).status_code,302)
         response=self.client.get('/').data.decode()
         self.assertIn('Un lieu.',response);self.assertIn('Une signature.',response)
-        data['hero_display_title']=''
+        data['hero_title']=''
         response=self.client.post('/admin/edit/site/settings/',data=data)
         self.assertIn('ne peuvent pas être vides',response.data.decode())
         self.assertIn('Une signature.',self.client.get('/').data.decode())

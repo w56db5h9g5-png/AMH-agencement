@@ -1,4 +1,4 @@
-# Rapport de validation — 12 novembre 2026
+# Rapport de validation — 13 novembre 2026
 
 ## Périmètre livré
 
@@ -25,7 +25,7 @@ Site Flask/Jinja rendu côté serveur, administration SQLite, pages publiques, f
 Exécuté avec Playwright sur le serveur Gunicorn local :
 
 - Accueil aux largeurs 360, 390, 768 et 1440 px : aucun débordement horizontal, photographies effectivement chargées après défilement.
-- V6 : navigation au logo centré sur ordinateur, signature marine, nouvelle photographie et hiérarchie du premier écran. Aucun débordement à 360, 390, 768 et 1440 px ; polices et images effectivement chargées.
+- V7 : hero de la V5, avec photo Rivoli et disposition en colonnes, navigation et reste de la V6 conservés. Aucun débordement à 360, 390, 768 et 1440 px ; polices et images effectivement chargées.
 - Micro-interactions discrètes et apparitions au défilement ; désactivation vérifiée avec `prefers-reduced-motion`. Aperçu des savoir-faire vérifié au pointeur et au clavier, avec synchronisation de l’état accessible des images.
 - Menu mobile : ouverture, fermeture avec Échap et restitution du focus.
 - FAQ, filtres, accès aux fiches et agrandissement des photos ; fermeture du dialogue avec Échap.
@@ -39,8 +39,8 @@ Captures : `apercu-ordinateur.png` et `apercu-mobile.png`. Rapport machine : `br
 
 Dernière mesure via PerformanceObserver dans Chromium, sur la machine locale, écran 1440 × 1000, sans ralentissement réseau/CPU et avec un cache navigateur déjà alimenté par les scénarios précédents :
 
-- LCP : 56 ms.
-- CLS : 0.000329.
+- LCP : 64 ms.
+- CLS : 0.000068.
 - INP : non mesuré.
 
 Ces valeurs ne démontrent pas le respect des Core Web Vitals en production. Aucun score Lighthouse ni audit d’accessibilité exhaustif n’est revendiqué. Les objectifs doivent être vérifiés sur l’hébergement cible et avec des appareils réels.
@@ -54,3 +54,7 @@ Aucune publication, modification DNS ou modification du site AMH existant n’a 
 ## Archive autonome V6
 
 Accueil rendu avec toutes les requêtes réseau bloquées : photographie 1600 px, police locale intégrée, style marine, menu mobile et aperçu interactif des savoir-faire fonctionnels. Aucune erreur JavaScript détectée. V5 conservée dans une branche et un ZIP distincts, avec contrôle de l’empreinte de son archive.
+
+## Livraison V7
+
+Hero issue du template et des styles V5 (`33add65`). Partie du template située après la hero comparée à la V6 (`850f816`) : identique. Feuille globale `atelier.css` et JavaScript V6 inchangés. Les styles hérités V5 sont isolés dans `hero-v7.css`, chargé uniquement sur l’accueil. Entrée autonome V7 testée sur ordinateur et mobile, en bloquant toutes les requêtes réseau. Archives et sources V5/V6 conservées.

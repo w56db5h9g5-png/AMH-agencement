@@ -22,7 +22,7 @@
     }
   ],
   "checks": [
-    "V6 art direction: centered logo on desktop, marine header, photographic hero, local fonts and brand colors; all images loaded; no overflow at 360, 390, 768, 1440px",
+    "V7: V5 split hero and photo, V6 centered navigation and remaining sections; all images loaded; no overflow at 360, 390, 768, 1440px",
     "Mobile menu, Escape/focus restoration, FAQ",
     "Server filters, project details, lightbox and Escape",
     "Internal links, page headings and mobile layout on all principal pages",
@@ -33,8 +33,8 @@
   ],
   "errors": [],
   "local_lab_metrics": {
-    "lcp": 56,
-    "cls": 0.0003286355779200424,
+    "lcp": 64,
+    "cls": 6.822175956066744e-05,
     "conditions": "Local Chromium, desktop 1440x1000, no network/CPU throttling; not field Core Web Vitals. INP unmeasured. Browser cache already populated by preceding checks."
   }
 }

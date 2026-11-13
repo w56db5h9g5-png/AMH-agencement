@@ -1,0 +1,67 @@
+/* V7 : hero extraite de la V5 (33add65), le reste conserve la V6. */
+.v7-hero-wrap{--paper:#faf8f4;--line:#dcdedc;--muted:#657074;background:var(--paper);color:var(--ink);line-height:1.75}
+.v7-hero-wrap .short-line{background:var(--gold-light);width:30px}
+.hero.premium-hero{grid-template-columns:1fr 1.04fr;gap:70px;align-items:center;padding-block:48px 65px}
+.premium-hero .hero-copy{padding:0;max-width:630px}
+.premium-hero .eyebrow{font-size:9px;letter-spacing:.16em;gap:13px;margin-bottom:32px}
+.premium-hero h1{font-size:clamp(60px,5.9vw,92px);line-height:.99;letter-spacing:-.055em;margin:0 0 32px;text-wrap:balance}
+.premium-hero .hero-copy>p{font-size:14px;line-height:1.95;max-width:355px;margin-bottom:30px;color:#63707b}
+.premium-hero .hero-actions{gap:27px;flex-wrap:wrap}
+.premium-hero .hero-actions .button{min-height:51px;font-size:10px;padding:17px 21px;gap:27px}
+.premium-hero .hero-actions .text-link{font-size:10px;gap:15px}
+.premium-hero .hero-note{margin-top:47px;padding-top:20px;max-width:370px;font-size:9px;letter-spacing:.02em;border-color:#061d321a;gap:18px}
+.premium-hero .mini-mark{color:var(--gold-light);font-size:32px}
+.premium-hero .hero-note strong{color:#737e84;font-size:9px}
+.premium-hero .hero-visual{height:650px;padding-right:0;margin:0 12px 18px 0;position:relative}
+.premium-hero .hero-visual::before{content:'';position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;border:1px solid #c9a25e70;z-index:-1}
+.premium-hero .hero-photo{object-fit:cover;object-position:53% center;width:100%;height:100%}
+.premium-hero .image-caption{left:35px;right:-12px;bottom:25px;padding:18px 22px;background:#faf8f4ed;color:var(--ink);display:grid;gap:4px;max-width:none;backdrop-filter:blur(8px)}
+.premium-hero .image-caption>span{font-size:8px;letter-spacing:.2em;color:#7a6a50}
+.premium-hero .image-caption a{font-family:var(--serif);font-size:23px;line-height:1.5}
+.premium-hero .vertical-caption{right:-39px;top:0;font-size:7px;letter-spacing:.2em;color:#6e7b82}
+@media(min-width:1650px){
+.premium-hero .hero-visual{height:740px}
+.premium-hero h1{font-size:102px}
+}
+@media(max-width:1150px){
+.hero.premium-hero{gap:45px}
+.premium-hero h1{font-size:70px}
+.premium-hero .hero-visual{height:610px}
+.premium-hero .hero-actions{gap:20px}
+.premium-hero .hero-actions .button{gap:20px;padding-inline:18px}
+}
+@media(max-width:900px){
+.hero.premium-hero{gap:35px}
+.premium-hero h1{font-size:60px}
+.premium-hero .hero-visual{height:570px}
+.premium-hero .hero-copy>p{font-size:13px}
+.premium-hero .hero-actions{align-items:flex-start;flex-direction:column;gap:18px}
+.premium-hero .hero-note{font-size:8px;margin-top:25px}
+.premium-hero .hero-note strong{font-size:8px}
+.premium-hero .image-caption{left:20px;padding:15px 18px;bottom:25px}
+.premium-hero .image-caption a{font-size:20px}
+}
+@media(max-width:700px){
+.hero.premium-hero{grid-template-columns:1fr;padding-block:35px 50px;gap:35px}
+.premium-hero .hero-copy{max-width:none}
+.premium-hero .eyebrow{font-size:8px;margin-bottom:26px;letter-spacing:.16em}
+.premium-hero h1{font-size:clamp(54px,14.5vw,84px);line-height:1.01;letter-spacing:-.045em;margin-bottom:24px;max-width:550px}
+.premium-hero .hero-copy>p{font-size:16px;line-height:1.8;max-width:440px;margin-bottom:25px}
+.premium-hero .hero-actions{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:23px}
+.premium-hero .hero-actions .button{font-size:10px;padding:16px 18px;gap:20px;min-height:50px}
+.premium-hero .hero-actions .text-link{font-size:10px;gap:12px}
+.premium-hero .hero-note{display:none}
+.premium-hero .hero-visual{height:450px;margin:0 10px 12px 0;width:calc(100% - 10px)}
+.premium-hero .hero-visual::before{top:12px;left:12px;right:-12px;bottom:-12px}
+.premium-hero .image-caption{left:22px;right:-10px;bottom:22px;padding:16px 17px}
+.premium-hero .image-caption a{font-size:22px}
+.premium-hero .image-caption>span{font-size:7px}
+.premium-hero .vertical-caption{display:none}
+}
+/* V5 : renforcer la signature marine en conservant la majorité des fonds clairs. */
+.premium-hero .image-caption{background:var(--ink);color:#fff;backdrop-filter:none}
+.premium-hero .image-caption>span{color:var(--gold-light)}
+.premium-hero .image-caption a{color:#fff}
+.premium-hero .image-caption a:hover{color:#f0d488}
+
+.v7-hero-wrap .hero-visual{isolation:isolate}

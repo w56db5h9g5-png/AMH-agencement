@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='css/atelier.css') }}">
 <script src="{{ url_for('static',filename='js/site.js') }}" defer></script>
 <script type="application/ld+json">{{ {'@context':'https://schema.org','@type':'Organization','name':site.name,'url':site_origin,'logo':site_origin+url_for('static',filename='images/logo.png')}|tojson }}</script>
+{% if request.endpoint=='home' %}<link rel="stylesheet" href="{{ url_for('static',filename='css/hero-v7.css') }}">{% endif %}
 {% block head %}{% endblock %}
 </head>
 <body class="{{ 'home-page' if request.endpoint=='home' else 'inner-page' }}">
